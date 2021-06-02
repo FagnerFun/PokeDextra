@@ -136,7 +136,7 @@ namespace Dextra.TDC.PokeDextra
             await this.ScaleEffect(frame);
             Selected = pokemon;
             SelectedName = name;
-            await PopupNavigation.Instance.PopAsync(true);
+            await PopupNavigation.Instance.PopAllAsync(true);
         }
     }
 }
