@@ -3,26 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dextra.TDC.PokeDextra.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="#E73E33" Padding="24" CornerRadius="0">
-            <Label Text="Laboratorio Pokemon Dextra" FontSize="20" HorizontalTextAlignment="Center" TextColor="White" />
+    <StackLayout Spacing="0">
+        <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
+            <Label Text="Laboratorio Pokemon Dextra" FontSize="20" HorizontalTextAlignment="Center" TextColor="#53F17C" />
         </Frame>
-        <StackLayout VerticalOptions="CenterAndExpand">
-            <Image Source="{Binding Selected}"  WidthRequest="250" HeightRequest="250"/>
-            <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,-40,0,0">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{Binding SelectedText}" FontSize="12" FontFamily="earlygame" />
-                        <Span Text="&#10;" />
-                        <Span Text="&#10;" />
-                        <Span Text="{Binding SelectedName}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+        <StackLayout VerticalOptions="FillAndExpand" Margin="0" BackgroundColor="{Binding SelectedBackground}">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="{Binding Selected}" WidthRequest="250" HeightRequest="250"/>
+                <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,-40,0,0" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding SelectedText}" FontSize="12" FontFamily="earlygame" />
+                            <Span Text="&#10;" />
+                            <Span Text="&#10;" />
+                            <Span Text="{Binding SelectedName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
         </StackLayout>
-        <StackLayout VerticalOptions="End" Margin="0,0,0,25">
-            <Button HorizontalOptions="FillAndExpand" Margin="25,0" BorderColor="Black" BorderWidth="1" BackgroundColor="Transparent" Text="Escolher meu pokemon" Command="{Binding SelectPokemonCommand}" />
-            <Button HorizontalOptions="FillAndExpand" Margin="25,0" BorderColor="Black" BorderWidth="1" BackgroundColor="Transparent" Text="Não quero pokemon" Command="{Binding SelectPokemonCommand}" />
+        <StackLayout VerticalOptions="End" BackgroundColor="Black">
+            <Button HorizontalOptions="FillAndExpand" Margin="25,25,25,0" BorderColor="Black" BorderWidth="1" TextColor="Black" BackgroundColor="#53F17C" Text="Escolher meu pokemon" Command="{Binding SelectPokemonCommand}" />
+            <Button HorizontalOptions="FillAndExpand" Margin="25,0,25,25" BorderColor="#53F17C" BorderWidth="1" TextColor="#53F17C" BackgroundColor="Transparent" Text="Não quero pokemon" Command="{Binding SelectPokemonCommand}" />
         </StackLayout>
     </StackLayout>
 

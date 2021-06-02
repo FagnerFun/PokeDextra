@@ -34,9 +34,9 @@ namespace Dextra.TDC.PokeDextra
         public MainViewModel()
         {
             SelectPokemonCommand = new Command(async () => await SelectPokemonExecuteAsync());
-            ChamanderCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Charmander, "Charmander"));
-            SquirtleCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Squirtle, "Squirtle"));
-            BulbasaurCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Bulbasaur, "Bulbasaur"));
+            ChamanderCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Charmander, "Charmander", "#F08030"));
+            SquirtleCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Squirtle, "Squirtle", "#6890F0"));
+            BulbasaurCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Bulbasaur, "Bulbasaur", "#79C951"));
         }
 
         private ImageSource selected;
@@ -77,7 +77,23 @@ namespace Dextra.TDC.PokeDextra
             }
         }
 
+        private string selectedBackground = "#FFFFFF";
 
+        public string SelectedBackground
+        {
+            get
+            {
+                return selectedBackground;
+            }
+
+            set
+            {
+                selectedBackground = value;
+                OnPropertyChanged(nameof(SelectedBackground));
+            }
+        }
+
+        
         public string SelectedText
         {
             get
@@ -131,11 +147,12 @@ namespace Dextra.TDC.PokeDextra
             await PopupNavigation.Instance.PushAsync(page, true);
         }
 
-        private async Task ChoosePokemonExecuteAsync(Frame frame, ImageSource pokemon, string name)
+        private async Task ChoosePokemonExecuteAsync(Frame frame, ImageSource pokemon, string name, string color)
         {
             await this.ScaleEffect(frame);
             Selected = pokemon;
             SelectedName = name;
+            SelectedBackground = color;
             await PopupNavigation.Instance.PopAllAsync(true);
         }
     }
