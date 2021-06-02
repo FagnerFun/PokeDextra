@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Dextra.TDC.PokeDextra.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="#E73E33" Padding="24" CornerRadius="0">
+            <Label Text="Laboratorio Pokemon Dextra" FontSize="20" HorizontalTextAlignment="Center" TextColor="White" />
+        </Frame>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Image Source="{Binding Selected}"  WidthRequest="250" HeightRequest="250"/>
+            <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,-40,0,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding SelectedText}" FontSize="12" FontFamily="earlygame" />
+                        <Span Text="&#10;" />
+                        <Span Text="&#10;" />
+                        <Span Text="{Binding SelectedName}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+        <StackLayout VerticalOptions="End" Margin="0,0,0,25">
+            <Button HorizontalOptions="FillAndExpand" Margin="25,0" BorderColor="Black" BorderWidth="1" BackgroundColor="Transparent" Text="Escolher meu pokemon" Command="{Binding SelectPokemonCommand}" />
+            <Button HorizontalOptions="FillAndExpand" Margin="25,0" BorderColor="Black" BorderWidth="1" BackgroundColor="Transparent" Text="Não quero pokemon" Command="{Binding SelectPokemonCommand}" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
