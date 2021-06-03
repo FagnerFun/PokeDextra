@@ -1,4 +1,6 @@
-﻿using Rg.Plugins.Popup.Services;
+﻿using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Dextra.TDC.PokeDextra
@@ -19,6 +22,7 @@ namespace Dextra.TDC.PokeDextra
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand SelectPokemonCommand { get; set; }
+        public ICommand ClearPokemonCommand { get; set; }
         public ICommand ChamanderCommand { get; set; }
         public ICommand SquirtleCommand { get; set; }
         public ICommand BulbasaurCommand { get; set; }
@@ -34,6 +38,7 @@ namespace Dextra.TDC.PokeDextra
         public MainViewModel()
         {
             SelectPokemonCommand = new Command(async () => await SelectPokemonExecuteAsync());
+            ClearPokemonCommand = new Command(async () => await ClearPokemonExecuteAsync());
             ChamanderCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Charmander, "Charmander", "#F08030"));
             SquirtleCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Squirtle, "Squirtle", "#6890F0"));
             BulbasaurCommand = new Command<Frame>(async (frame) => await ChoosePokemonExecuteAsync(frame, Bulbasaur, "Bulbasaur", "#79C951"));
@@ -147,13 +152,48 @@ namespace Dextra.TDC.PokeDextra
             await PopupNavigation.Instance.PushAsync(page, true);
         }
 
+        private async Task ClearPokemonExecuteAsync()
+        {
+            try
+            {
+                if (selected != null)
+                {
+                    Selected = null;
+                    SelectedName = null;
+                    SelectedBackground = "#ffffff";
+                    throw new Exception("Não quero um Pokemon!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                await App.Current.MainPage.DisplayAlert("Aviso", "O Pokemon selecionado se foi :( ", "Ok");
+            }
+        }
+
         private async Task ChoosePokemonExecuteAsync(Frame frame, ImageSource pokemon, string name, string color)
         {
-            await this.ScaleEffect(frame);
-            Selected = pokemon;
-            SelectedName = name;
-            SelectedBackground = color;
-            await PopupNavigation.Instance.PopAllAsync(true);
+            try
+            {
+                await this.ScaleEffect(frame);
+                Selected = pokemon;
+                SelectedName = name;
+                SelectedBackground = color;
+                await PopupNavigation.Instance.PopAllAsync(true);
+
+                Dictionary<string, string> logParams = new Dictionary<string, string>();
+                logParams.Add("Pokemon", name);
+                logParams.Add("Cor", color);
+                logParams.Add("Manufacturer", DeviceInfo.Manufacturer);
+                logParams.Add("Model", DeviceInfo.Model);
+                logParams.Add("Version ", DeviceInfo.VersionString);
+
+                Analytics.TrackEvent("Pokemon Escolhido", logParams);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+            }
         }
     }
 }

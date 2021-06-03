@@ -24,7 +24,7 @@
         </StackLayout>
         <StackLayout VerticalOptions="End" BackgroundColor="Black">
             <Button HorizontalOptions="FillAndExpand" Margin="25,25,25,0" BorderColor="Black" BorderWidth="1" TextColor="Black" BackgroundColor="#53F17C" Text="Escolher meu pokemon" Command="{Binding SelectPokemonCommand}" />
-            <Button HorizontalOptions="FillAndExpand" Margin="25,0,25,25" BorderColor="#53F17C" BorderWidth="1" TextColor="#53F17C" BackgroundColor="Transparent" Text="Não quero pokemon" Command="{Binding SelectPokemonCommand}" />
+            <Button HorizontalOptions="FillAndExpand" Margin="25,0,25,25" BorderColor="#53F17C" BorderWidth="1" TextColor="#53F17C" BackgroundColor="Transparent" Text="Não quero pokemon" Command="{Binding ClearPokemonCommand}" />
         </StackLayout>
     </StackLayout>
 
