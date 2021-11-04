@@ -72,7 +72,7 @@ steps:
     uiTestToolsDirectory: '$(build.binariesdirectory)/uitests'
     serverEndpoint: AppCenterApiToken
     appSlug: 'DemosDextra/PokeDextra'
-    devices: DemosDextra/AzureDevOps
+    devices: DemosDextra/AoVivo
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: android-artifact'
