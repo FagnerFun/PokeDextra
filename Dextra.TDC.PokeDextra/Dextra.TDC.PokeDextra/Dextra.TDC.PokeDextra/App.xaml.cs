@@ -24,7 +24,7 @@ namespace Dextra.TDC.PokeDextra
 
         protected override void OnStart()
         {
-            AppCenter.Start("android=b072c627-d797-4798-9e8d-4c6161ae4945;", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("android=dacfaa84-3430-4f64-94eb-a660220b1034;", typeof(Analytics), typeof(Crashes));
             Analytics.TrackEvent("App iniciado", _logParams);
         }
 
