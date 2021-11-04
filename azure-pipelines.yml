@@ -73,7 +73,7 @@ steps:
     prepareOptions: '--debug'
     serverEndpoint: AppCenterApiToken
     appSlug: 'DemosDextra/PokeDextra'
-    devices: PokeDextra/PokeDextra
+    devices: DemosDextra/AzureDevOps
     runOptions: '--debug'
 
 - task: PublishBuildArtifacts@1
