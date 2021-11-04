@@ -24,7 +24,8 @@
              VerticalOptions="Center"
             Padding="10, 5"
             Spacing="3">
-        <Frame x:Name="chamanderFrame" Padding="5" CornerRadius="5" Margin="0,10" BackgroundColor="#F08030">
+        <Label IsVisible="false" Text="Escolha seu pokemon" AutomationId="ChoosePokemonTitle" />
+        <Frame AutomationId="btnCharmander" x:Name="chamanderFrame" Padding="5" CornerRadius="5" Margin="0,10" BackgroundColor="#F08030">
             <StackLayout>
                 <Image WidthRequest="120" HeightRequest="120" Source="{Binding Charmander}"/>
                 <Label Text="Charmander" FontFamily="earlygame" HorizontalOptions="Center" FontSize="12" Margin="0,-25,0,0" />
@@ -33,7 +34,7 @@
                 <TapGestureRecognizer Command = "{Binding ChamanderCommand}" CommandParameter="{x:Reference chamanderFrame}"/>
             </Frame.GestureRecognizers>
         </Frame>
-        <Frame x:Name="squirtleFrame" Padding="5" CornerRadius="5" Margin="2,10" BackgroundColor="#6890F0">
+        <Frame AutomationId="btnSquirtle"  x:Name="squirtleFrame" Padding="5" CornerRadius="5" Margin="2,10" BackgroundColor="#6890F0">
             <StackLayout>
                 <Image WidthRequest="120" HeightRequest="120" Source="{Binding Squirtle}"/>
                 <Label Text="Squirtle" FontFamily="earlygame" HorizontalOptions="Center" FontSize="12" Margin="0,-25,0,0" />
@@ -42,7 +43,7 @@
                 <TapGestureRecognizer Command = "{Binding SquirtleCommand}" CommandParameter="{x:Reference squirtleFrame}"/>
             </Frame.GestureRecognizers>
         </Frame>
-        <Frame x:Name="bulbasaurFrame" Padding="5" CornerRadius="5" Margin="0,10" BackgroundColor="#79C951">
+        <Frame AutomationId="btnBulbasaur"  x:Name="bulbasaurFrame" Padding="5" CornerRadius="5" Margin="0,10" BackgroundColor="#79C951">
             <StackLayout>
                 <Image WidthRequest="120" HeightRequest="120" Source="{Binding Bulbasaur}"/>
                 <Label Text="Bulbasaur" FontFamily="earlygame" HorizontalOptions="Center" FontSize="12" Margin="0,-25,0,0" />

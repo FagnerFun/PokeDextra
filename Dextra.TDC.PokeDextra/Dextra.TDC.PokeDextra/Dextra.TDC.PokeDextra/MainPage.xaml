@@ -5,26 +5,18 @@
 
     <StackLayout Spacing="0">
         <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
-            <Label Text="Laboratorio Pokemon Dextra" FontSize="20" HorizontalTextAlignment="Center" TextColor="#53F17C" />
+            <Label AutomationId="MainPageTitle" Text="Laboratorio Pokemon Dextra" FontSize="20" HorizontalTextAlignment="Center" TextColor="#53F17C" />
         </Frame>
         <StackLayout VerticalOptions="FillAndExpand" Margin="0" BackgroundColor="{Binding SelectedBackground}">
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Image Source="{Binding Selected}" WidthRequest="250" HeightRequest="250"/>
-                <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,-40,0,0" TextColor="White">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding SelectedText}" FontSize="12" FontFamily="earlygame" />
-                            <Span Text="&#10;" />
-                            <Span Text="&#10;" />
-                            <Span Text="{Binding SelectedName}" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <Label AutomationId="lblPokemon"  Text="{Binding SelectedText}" FontSize="12" FontFamily="earlygame" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,-40,0,0" TextColor="White" />
+                <Label Text="{Binding SelectedName}" FontSize="16" FontFamily="earlygame" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,30,0,0" TextColor="White" />
             </StackLayout>
         </StackLayout>
         <StackLayout VerticalOptions="End" BackgroundColor="Black">
-            <Button HorizontalOptions="FillAndExpand" Margin="25,25,25,0" BorderColor="Black" BorderWidth="1" TextColor="Black" BackgroundColor="#53F17C" Text="Escolher meu pokemon" Command="{Binding SelectPokemonCommand}" />
-            <Button HorizontalOptions="FillAndExpand" Margin="25,0,25,25" BorderColor="#53F17C" BorderWidth="1" TextColor="#53F17C" BackgroundColor="Transparent" Text="Não quero pokemon" Command="{Binding ClearPokemonCommand}" />
+            <Button AutomationId="btnChoosePokemon" HorizontalOptions="FillAndExpand" Margin="25,25,25,0" BorderColor="Black" BorderWidth="1" TextColor="Black" BackgroundColor="#53F17C" Text="Escolher meu pokemon" Command="{Binding SelectPokemonCommand}" />
+            <Button AutomationId="btnClearPokemon" HorizontalOptions="FillAndExpand" Margin="25,0,25,25" BorderColor="#53F17C" BorderWidth="1" TextColor="#53F17C" BackgroundColor="Transparent" Text="Não quero pokemon" Command="{Binding ClearPokemonCommand}" />
         </StackLayout>
     </StackLayout>
 
