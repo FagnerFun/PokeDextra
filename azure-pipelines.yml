@@ -1,0 +1,91 @@
+# Xamarin.Android
+# Build a Xamarin.Android project.
+# Add steps that test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfiguration: 'Release'
+  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+
+steps:
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 5.x'
+  inputs:
+    versionSpec: 5.x
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.sln'
+    restoreDirectory: '$(System.DefaultWorkingDirectory)/package'
+
+- task: XamarinAndroid@1
+  displayName: 'Build Xamarin.Android'
+  inputs:
+    projectFile: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.Android/Dextra.TDC.PokeDextra.Android.csproj'
+    outputDirectory: '$(build.binariesdirectory)/$(BuildConfiguration)/AndroidOutput'
+    configuration: '$(BuildConfiguration)'
+    msbuildVersionOption: 16.0
+    msbuildArchitectureOption: x64
+
+- task: AndroidSigning@3
+  displayName: 'Signing and aligning'
+  inputs:
+    apkFiles: '$(build.binariesdirectory)/$(BuildConfiguration)/AndroidOutput/*.apk'
+    apksignerKeystoreFile: 'PokeDextra.keystore'
+    apksignerKeystorePassword: '$(key_password)'
+    apksignerKeystoreAlias: PokeDextra
+    apksignerKeyPassword: '$(key_password)'
+    apksignerArguments: '--verbose  --min-sdk-version 21'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Unit Test'
+  inputs:
+    command: test
+    projects: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.UnitTest/Dextra.TDC.PokeDextra.UnitTest.csproj'
+
+- task: NodeTool@0
+  displayName: 'Use Node 10.x.x'
+  inputs:
+    versionSpec: 10.x.x
+
+- task: MSBuild@1
+  displayName: 'Build UITest'
+  inputs:
+    solution: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.UITest/Dextra.TDC.PokeDextra.UITest.csproj'
+    msbuildArchitecture: x64
+    configuration: '$(BuildConfiguration)'
+    msbuildArguments: '/p:OutputPath=$(build.binariesdirectory)/uitests'
+
+- task: AppCenterTest@1
+  displayName: 'Test with Visual Studio App Center'
+  inputs:
+    appFile: '$(build.binariesdirectory)/$(BuildConfiguration)/AndroidOutput/*.apk'
+    frameworkOption: uitest
+    uiTestBuildDirectory: '$(build.binariesdirectory)/uitests'
+    uiTestToolsDirectory: '$(System.DefaultWorkingDirectory)/package/xamarin.uitest/3.0.15/tools'
+    prepareOptions: '--debug'
+    serverEndpoint: AppCenterToken
+    appSlug: 'DemosDextra/PokeDextra'
+    devices: PokeDextra/PokeDextra
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: android-artifact'
+  inputs:
+    PathtoPublish: '$(build.binariesdirectory)/$(BuildConfiguration)/AndroidOutput'
+    ArtifactName: 'android-artifact'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: uitest-artifact'
+  inputs:
+    PathtoPublish: '$(build.binariesdirectory)/uitests'
+    ArtifactName: 'uitest-artifact'
+  enabled: false
+  condition: succeededOrFailed()
