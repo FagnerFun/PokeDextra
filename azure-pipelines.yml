@@ -70,11 +70,9 @@ steps:
     frameworkOption: uitest
     uiTestBuildDirectory: '$(build.binariesdirectory)/uitests'
     uiTestToolsDirectory: '$(build.binariesdirectory)/uitests'
-    prepareOptions: '--debug'
     serverEndpoint: AppCenterApiToken
     appSlug: 'DemosDextra/PokeDextra'
     devices: DemosDextra/AzureDevOps
-    runOptions: '--debug'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: android-artifact'
