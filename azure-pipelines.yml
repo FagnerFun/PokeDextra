@@ -71,7 +71,7 @@ steps:
     uiTestBuildDirectory: '$(build.binariesdirectory)/uitests'
     uiTestToolsDirectory: '$(build.binariesdirectory)/uitests'
     prepareOptions: '--debug'
-    serverEndpoint: AppCenterToken
+    serverEndpoint: AppCenterApiToken
     appSlug: 'DemosDextra/PokeDextra'
     devices: PokeDextra/PokeDextra
     runOptions: '--debug'
