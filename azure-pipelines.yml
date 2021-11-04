@@ -69,7 +69,7 @@ steps:
     appFile: '$(build.binariesdirectory)/$(BuildConfiguration)/AndroidOutput/*.apk'
     frameworkOption: uitest
     uiTestBuildDirectory: '$(build.binariesdirectory)/uitests'
-    uiTestToolsDirectory: '$(System.DefaultWorkingDirectory)/package/xamarin.uitest/3.0.15/tools'
+    uiTestToolsDirectory: '$(build.binariesdirectory)/uitests'
     prepareOptions: '--debug'
     serverEndpoint: AppCenterToken
     appSlug: 'DemosDextra/PokeDextra'
