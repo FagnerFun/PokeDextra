@@ -22,7 +22,7 @@ steps:
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
   inputs:
-    restoreSolution: '$(Parameters.restorePkgSolution)'
+    restoreSolution: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.sln'
     restoreDirectory: '$(System.DefaultWorkingDirectory)/package'
 
 - task: XamarinAndroid@1
