@@ -74,6 +74,7 @@ steps:
     serverEndpoint: AppCenterToken
     appSlug: 'DemosDextra/PokeDextra'
     devices: PokeDextra/PokeDextra
+    runOptions: '--debug'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: android-artifact'
