@@ -28,7 +28,7 @@ steps:
 - task: XamarinAndroid@1
   displayName: 'Build Xamarin.Android'
   inputs:
-    projectFile: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.Android/Dextra.TDC.PokeDextra.Android.csproj'
+    projectFile: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.Android/Dextra.TDC.PokeDextra.Android.csproj'
     outputDirectory: '$(build.binariesdirectory)/$(BuildConfiguration)/AndroidOutput'
     configuration: '$(BuildConfiguration)'
     msbuildVersionOption: 16.0
