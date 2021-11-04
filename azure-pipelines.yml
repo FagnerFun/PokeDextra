@@ -71,8 +71,8 @@ steps:
     uiTestBuildDirectory: '$(build.binariesdirectory)/uitests'
     uiTestToolsDirectory: '$(System.DefaultWorkingDirectory)/package/xamarin.uitest/3.0.15/tools'
     prepareOptions: '--debug'
-    serverEndpoint: Testers
-    appSlug: 'users/fernando.vendramin-dextra-sw.com/PokeDextra'
+    serverEndpoint: AppCenterToken
+    appSlug: 'DemosDextra/PokeDextra'
     devices: PokeDextra/PokeDextra
 
 - task: PublishBuildArtifacts@1
