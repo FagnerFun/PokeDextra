@@ -6,8 +6,7 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'windows-2019'
+pool: jundevelopers
 
 variables:
   buildConfiguration: 'Release'
@@ -51,11 +50,13 @@ steps:
     projects: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.UnitTest/Dextra.TDC.PokeDextra.UnitTest.csproj'
 
 - task: NodeTool@0
+  enabled: false
   displayName: 'Use Node 10.x.x'
   inputs:
     versionSpec: 10.x.x
 
 - task: MSBuild@1
+  enabled: false
   displayName: 'Build UITest'
   inputs:
     solution: 'Dextra.TDC.PokeDextra/Dextra.TDC.PokeDextra.UITest/Dextra.TDC.PokeDextra.UITest.csproj'
@@ -64,6 +65,7 @@ steps:
     msbuildArguments: '/p:OutputPath=$(build.binariesdirectory)/uitests'
 
 - task: AppCenterTest@1
+  enabled: false
   displayName: 'Test with Visual Studio App Center'
   inputs:
     appFile: '$(build.binariesdirectory)/$(BuildConfiguration)/AndroidOutput/*.apk'
